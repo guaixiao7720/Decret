@@ -1,0 +1,248 @@
+[gd_scene load_steps=12 format=3 uid="uid://ceyvvrl6e50en"]
+
+[ext_resource type="Script" path="res://client/scenario/PE/login/login.gd" id="1_33wyp"]
+[ext_resource type="Theme" uid="uid://vspng5affrpu" path="res://client/theme/default.tres" id="1_sd5en"]
+[ext_resource type="PackedScene" uid="uid://4w03a7vdwft2" path="res://client/scenario/PE/login/eulaButton.tscn" id="2_6exyl"]
+[ext_resource type="Script" path="res://client/scenario/PE/login/login_window.gd" id="2_ockxj"]
+[ext_resource type="Script" path="res://client/scenario/PE/login/eula_window.gd" id="4_mut2w"]
+[ext_resource type="Script" path="res://client/scenario/PE/login/ok_button.gd" id="4_wjctd"]
+[ext_resource type="Script" path="res://client/scenario/PE/login/reg_window.gd" id="6_wyvpi"]
+[ext_resource type="Script" path="res://client/scenario/PE/login/reg_control.gd" id="7_rhneq"]
+[ext_resource type="Script" path="res://client/scenario/PE/login/generate_button.gd" id="8_oyy4x"]
+[ext_resource type="Script" path="res://client/scenario/PE/login/login_button.gd" id="9_tayhw"]
+[ext_resource type="Script" path="res://client/scenario/PE/login/key_accept_dialog.gd" id="11_g4wfj"]
+
+[node name="Login" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_sd5en")
+script = ExtResource("1_33wyp")
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+anchor_left = 0.281333
+anchor_top = 0.397783
+anchor_right = 0.78
+anchor_bottom = 0.458128
+theme_override_font_sizes/font_size = 28
+text = "relay_server"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
+
+[node name="RelayGridContainer" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.141333
+anchor_top = 0.455049
+anchor_right = 0.918667
+anchor_bottom = 0.548645
+columns = 2
+metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="RelayGridContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_font_sizes/font_size = 28
+text = "adress"
+
+[node name="LineEdit" type="LineEdit" parent="RelayGridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 28
+
+[node name="LoginWindow" type="Window" parent="."]
+title = "login"
+initial_position = 1
+size = Vector2i(400, 300)
+visible = false
+script = ExtResource("2_ockxj")
+
+[node name="LoginControl" type="Control" parent="LoginWindow"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LoginGridContainer" type="GridContainer" parent="LoginWindow/LoginControl"]
+layout_mode = 0
+offset_left = 43.015
+offset_top = 41.16
+offset_right = 349.225
+offset_bottom = 90.16
+columns = 2
+
+[node name="Label" type="Label" parent="LoginWindow/LoginControl/LoginGridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "
+key"
+
+[node name="KeyLineEdit" type="LineEdit" parent="LoginWindow/LoginControl/LoginGridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 28
+
+[node name="EulaButton" parent="LoginWindow/LoginControl/LoginGridContainer" instance=ExtResource("2_6exyl")]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+
+[node name="HBoxContainer" type="HBoxContainer" parent="LoginWindow/LoginControl/LoginGridContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="LoginWindow/LoginControl/LoginGridContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "accept_eula"
+
+[node name="CheckBox" type="CheckBox" parent="LoginWindow/LoginControl/LoginGridContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="OkButton" type="Button" parent="LoginWindow/LoginControl"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -8.0
+offset_top = -8.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 28
+disabled = true
+text = "ok"
+script = ExtResource("4_wjctd")
+
+[node name="EulaWindow" type="Window" parent="."]
+title = "EULA"
+initial_position = 1
+size = Vector2i(400, 600)
+visible = false
+script = ExtResource("4_mut2w")
+
+[node name="EulaControl" type="Control" parent="EulaWindow"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 400.0
+offset_bottom = 600.0
+
+[node name="EulaRichTextLabel" type="RichTextLabel" parent="EulaWindow/EulaControl"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+
+[node name="RegWindow" type="Window" parent="."]
+title = "generate_key"
+initial_position = 1
+size = Vector2i(400, 300)
+visible = false
+script = ExtResource("6_wyvpi")
+
+[node name="RegControl" type="Control" parent="RegWindow"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("7_rhneq")
+
+[node name="Label" type="Label" parent="RegWindow/RegControl"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 28
+text = "点击生成密钥"
+
+[node name="GenerateButton" type="Button" parent="RegWindow/RegControl"]
+custom_minimum_size = Vector2(65, 0)
+layout_mode = 0
+offset_left = 211.45
+offset_right = 340.45
+offset_bottom = 47.0
+theme_override_font_sizes/font_size = 28
+disabled = true
+text = "generate"
+script = ExtResource("8_oyy4x")
+
+[node name="EulaButton" parent="RegWindow/RegControl" instance=ExtResource("2_6exyl")]
+custom_minimum_size = Vector2(101.405, 0)
+layout_mode = 1
+offset_left = 32.01
+offset_top = 244.265
+offset_right = 131.175
+offset_bottom = 290.501
+theme_override_font_sizes/font_size = 28
+
+[node name="HBoxContainer" type="HBoxContainer" parent="RegWindow/RegControl"]
+layout_mode = 0
+offset_left = 179.4
+offset_top = 243.51
+offset_right = 366.4
+offset_bottom = 282.51
+
+[node name="Label" type="Label" parent="RegWindow/RegControl/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "accept_eula"
+
+[node name="CheckBox" type="CheckBox" parent="RegWindow/RegControl/HBoxContainer"]
+layout_mode = 2
+
+[node name="LoginButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.125333
+anchor_top = 0.578818
+anchor_right = 0.926667
+anchor_bottom = 0.619458
+theme_override_font_sizes/font_size = 28
+text = "login"
+script = ExtResource("9_tayhw")
+metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
+
+[node name="registerButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.121333
+anchor_top = 0.649631
+anchor_right = 0.924
+anchor_bottom = 0.695197
+theme_override_font_sizes/font_size = 28
+text = "register"
+metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
+
+[node name="KeyAcceptDialog" type="AcceptDialog" parent="."]
+title = "没有密钥!"
+initial_position = 1
+size = Vector2i(400, 300)
+dialog_text = "请点击注册按钮生成密钥！"
+script = ExtResource("11_g4wfj")
+
+[connection signal="close_requested" from="LoginWindow" to="LoginWindow" method="_on_close_requested"]
+[connection signal="toggled" from="LoginWindow/LoginControl/LoginGridContainer/HBoxContainer/CheckBox" to="LoginWindow/LoginControl/OkButton" method="_on_check_box_toggled"]
+[connection signal="pressed" from="LoginWindow/LoginControl/OkButton" to="LoginWindow/LoginControl/OkButton" method="_on_pressed"]
+[connection signal="close_requested" from="EulaWindow" to="EulaWindow" method="_on_close_requested"]
+[connection signal="close_requested" from="RegWindow" to="RegWindow" method="_on_close_requested"]
+[connection signal="pressed" from="RegWindow/RegControl/GenerateButton" to="RegWindow/RegControl/GenerateButton" method="_on_pressed"]
+[connection signal="toggled" from="RegWindow/RegControl/HBoxContainer/CheckBox" to="RegWindow/RegControl/GenerateButton" method="_on_check_box_toggled"]
+[connection signal="pressed" from="LoginButton" to="LoginWindow" method="_on_login_button_pressed"]
+[connection signal="pressed" from="LoginButton" to="LoginButton" method="_on_pressed"]
+[connection signal="pressed" from="registerButton" to="RegWindow" method="_on_register_button_pressed"]
+[connection signal="canceled" from="KeyAcceptDialog" to="KeyAcceptDialog" method="_on_canceled"]

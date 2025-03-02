@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://4w03a7vdwft2"]
+
+[ext_resource type="Script" path="res://client/scenario/PE/login/eula_button.gd" id="1_oenx5"]
+
+[node name="EulaButton" type="Button"]
+anchors_preset = -1
+anchor_right = 0.056
+anchor_bottom = 0.0190887
+offset_right = -42.0
+offset_bottom = -31.0
+text = "eula"
+script = ExtResource("1_oenx5")
+metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

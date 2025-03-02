@@ -1,0 +1,225 @@
+[gd_scene load_steps=13 format=3 uid="uid://rg10ottkatgt"]
+
+[ext_resource type="Script" path="res://client/scenario/PE/menu/contact_list.gd" id="1_0uixb"]
+[ext_resource type="Theme" uid="uid://vspng5affrpu" path="res://client/theme/default.tres" id="1_owahp"]
+[ext_resource type="Script" path="res://client/scenario/PE/menu/add_button.gd" id="3_foriy"]
+[ext_resource type="Script" path="res://client/scenario/PE/menu/chat_control.gd" id="3_u2v2u"]
+[ext_resource type="Script" path="res://client/scenario/PE/menu/message_scroll_container.gd" id="4_yrdwg"]
+[ext_resource type="Script" path="res://client/scenario/PE/menu/input_control.gd" id="5_0n5uo"]
+[ext_resource type="Texture2D" uid="uid://dtg426mbw1v2w" path="res://client/UI/send.png" id="5_6mfq6"]
+[ext_resource type="Texture2D" uid="uid://bax8bc17pmhi2" path="res://client/UI/add.png" id="6_ckadc"]
+[ext_resource type="Texture2D" uid="uid://dyvasvbf3v78j" path="res://client/UI/back.png" id="6_voyc5"]
+[ext_resource type="Script" path="res://client/scenario/PE/menu/add_window.gd" id="6_vrtdb"]
+[ext_resource type="Script" path="res://client/scenario/PE/menu/disconnect_accept_dialog.gd" id="8_vuflk"]
+[ext_resource type="Script" path="res://client/scenario/PE/menu/copy_public_key_button.gd" id="11_oejtg"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("1_owahp")
+metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
+
+[node name="ChatControl" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("3_u2v2u")
+metadata/_edit_lock_ = true
+
+[node name="AvatatTextureRect" type="TextureRect" parent="ChatControl"]
+layout_mode = 0
+anchor_right = 0.126667
+anchor_bottom = 0.0584975
+metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
+
+[node name="nameLabel" type="Label" parent="ChatControl"]
+layout_mode = 0
+anchor_left = 0.154667
+anchor_top = 0.00738916
+anchor_right = 0.944
+anchor_bottom = 0.0554187
+theme_override_font_sizes/font_size = 28
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
+
+[node name="MessageScrollContainer" type="ScrollContainer" parent="ChatControl"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.1133
+anchor_right = 1.0
+anchor_bottom = 0.91564
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_yrdwg")
+metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
+
+[node name="MessageVBoxContainer" type="VBoxContainer" parent="ChatControl/MessageScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
+
+[node name="InputControl" type="Control" parent="ChatControl"]
+anchors_preset = 0
+anchor_left = -0.00266667
+anchor_top = 0.846675
+anchor_right = 0.998667
+anchor_bottom = 0.99569
+script = ExtResource("5_0n5uo")
+metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
+
+[node name="TextEdit" type="TextEdit" parent="ChatControl/InputControl"]
+layout_mode = 0
+anchor_left = 0.00266312
+anchor_top = -0.0123967
+anchor_right = 0.744341
+anchor_bottom = 1.00413
+offset_bottom = -1.52588e-05
+theme_override_font_sizes/font_size = 22
+placeholder_text = "please_enter_your_message"
+metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
+
+[node name="SendButton" type="TextureButton" parent="ChatControl/InputControl"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.750998
+anchor_top = 0.194214
+anchor_right = 0.984021
+anchor_bottom = 0.921486
+texture_normal = ExtResource("5_6mfq6")
+ignore_texture_size = true
+stretch_mode = 0
+metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
+
+[node name="BackButton" type="TextureButton" parent="ChatControl"]
+layout_mode = 0
+offset_right = 88.0
+offset_bottom = 88.0
+texture_normal = ExtResource("6_voyc5")
+ignore_texture_size = true
+stretch_mode = 0
+metadata/_edit_lock_ = true
+
+[node name="ContactListControl" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="ContactList" type="VBoxContainer" parent="ContactListControl"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.0923645
+anchor_right = 1.0
+anchor_bottom = 0.934729
+offset_top = 146.305
+offset_bottom = 146.305
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0uixb")
+metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
+
+[node name="AddButton" type="TextureButton" parent="ContactListControl"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.846667
+anchor_top = 0.00184729
+anchor_right = 0.994667
+anchor_bottom = 0.0658867
+offset_right = 6.10352e-05
+texture_normal = ExtResource("6_ckadc")
+ignore_texture_size = true
+stretch_mode = 0
+metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
+
+[node name="AddWindow" type="Window" parent="ContactListControl"]
+title = "add_friend"
+initial_position = 1
+size = Vector2i(400, 300)
+visible = false
+script = ExtResource("6_vrtdb")
+
+[node name="Control" type="Control" parent="ContactListControl/AddWindow"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 400.0
+offset_bottom = 300.0
+
+[node name="TextEdit" type="TextEdit" parent="ContactListControl/AddWindow/Control"]
+layout_mode = 0
+offset_left = 170.68
+offset_top = 32.675
+offset_right = 370.68
+offset_bottom = 182.675
+theme_override_font_sizes/font_size = 28
+
+[node name="Label" type="Label" parent="ContactListControl/AddWindow/Control"]
+layout_mode = 0
+offset_left = 11.75
+offset_top = 98.215
+offset_right = 91.75
+offset_bottom = 121.215
+theme_override_font_sizes/font_size = 28
+text = "请输入公钥"
+
+[node name="AddButton" type="Button" parent="ContactListControl/AddWindow/Control"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 0
+offset_left = 169.315
+offset_top = 222.36
+offset_right = 239.315
+offset_bottom = 253.36
+theme_override_font_sizes/font_size = 28
+text = "OK"
+script = ExtResource("3_foriy")
+
+[node name="CopyPublicKeyButton" type="Button" parent="ContactListControl"]
+layout_mode = 0
+anchor_left = 0.608
+anchor_top = 0.00492611
+anchor_right = 0.832
+anchor_bottom = 0.0652709
+theme_override_font_sizes/font_size = 28
+text = "复制我的公钥"
+script = ExtResource("11_oejtg")
+metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
+
+[node name="DisconnectAcceptDialog" type="AcceptDialog" parent="."]
+title = "disconnect"
+initial_position = 1
+size = Vector2i(400, 300)
+script = ExtResource("8_vuflk")
+
+[connection signal="text_changed" from="ChatControl/InputControl/TextEdit" to="ChatControl/InputControl" method="_on_text_edit_text_changed"]
+[connection signal="pressed" from="ChatControl/InputControl/SendButton" to="ChatControl/InputControl" method="_on_send_button_pressed"]
+[connection signal="pressed" from="ChatControl/BackButton" to="ChatControl" method="_on_back_button_pressed"]
+[connection signal="pressed" from="ContactListControl/AddButton" to="ContactListControl/AddWindow" method="_on_add_button_pressed"]
+[connection signal="close_requested" from="ContactListControl/AddWindow" to="ContactListControl/AddWindow" method="_on_close_requested"]
+[connection signal="pressed" from="ContactListControl/AddWindow/Control/AddButton" to="ContactListControl/AddWindow/Control/AddButton" method="_on_pressed"]
+[connection signal="pressed" from="ContactListControl/CopyPublicKeyButton" to="ContactListControl/CopyPublicKeyButton" method="_on_pressed"]
+[connection signal="canceled" from="DisconnectAcceptDialog" to="DisconnectAcceptDialog" method="_on_canceled"]

@@ -1,0 +1,11 @@
+id,en,zh_CN
+relay_server,Relay Server,中转服务器
+adress,Adress,地址
+login,Login,登录
+register,Register,注册
+eula,EULA,用户协议
+OK,OK,好
+generate,Generate,生成
+generate_key,Generate_key,生成密钥
+disconnect,Disconnect,断开连接
+accept_eula,Accept EULA,同意用户协议

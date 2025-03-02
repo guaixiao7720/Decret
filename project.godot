@@ -1,0 +1,43 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Decret"
+run/main_scene="res://ready/ready.tscn"
+config/features=PackedStringArray("4.3", "GL Compatibility")
+config/icon="res://icon.svg"
+
+[autoload]
+
+GlobalValue="*res://global/GlobalValue.gd"
+Tools="*res://client/scenario/lib/tools.gd"
+ENet="*res://global/ENet.gd"
+
+[display]
+
+window/size/viewport_width=750
+window/size/viewport_height=1624
+window/stretch/mode="viewport"
+window/handheld/orientation=1
+
+[dotnet]
+
+project/assembly_name="Secret Decree"
+
+[internationalization]
+
+locale/translations=PackedStringArray("res://client/lang/lang.zh_CN.translation", "res://client/lang/lang.en.translation")
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+textures/vram_compression/import_etc2_astc=true

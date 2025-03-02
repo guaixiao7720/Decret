@@ -1,0 +1,36 @@
+[gd_scene load_steps=2 format=3 uid="uid://c3suurfbleroy"]
+
+[ext_resource type="Script" path="res://client/scenario/lib/promptWindow/prompt_window.gd" id="1_n3f37"]
+
+[node name="PromptWindow" type="Window"]
+initial_position = 1
+script = ExtResource("1_n3f37")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 100.0
+offset_bottom = 100.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Button" type="Button" parent="Control"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -18.0
+offset_top = -31.0
+offset_right = 18.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "ok"
+
+[connection signal="close_requested" from="." to="." method="_on_close_requested"]
+[connection signal="pressed" from="Control/Button" to="." method="_on_button_pressed"]
