@@ -6,6 +6,11 @@ var keyRpcID: Dictionary = {}
 
 var serverRpcId: int
 
+enum MESSAGE_TYPE{
+	TEXT,
+	OBJ,
+}
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -76,8 +81,10 @@ func getRpcId(publicKey: String):
 
 @rpc("authority", "call_remote")
 func recieveRpcId(id: int):
-	print("111")
-	get_node("/root/Menu/ChatControl/InputControl").send(id)
+	if get_node("/root/Menu/ChatControl/InputControl/InputVBoxContainer/ImageControl").is_visible_in_tree():
+		get_node("/root/Menu/ChatControl/InputControl/InputVBoxContainer/ImageControl").send(id)
+	else:
+		get_node("/root/Menu/ChatControl/InputControl").send(id)
 
 @rpc("authority", "call_remote")
 func connectSucess(serverRpcId: int):
@@ -99,7 +106,7 @@ func connectSucess(serverRpcId: int):
 
 
 @rpc("any_peer", "call_remote")
-func sendMessage(cipherText: PackedByteArray, publicKey: String):
+func sendMessage(cipherText: PackedByteArray, aesKey: PackedByteArray, length: int, publicKey: String):
 	var keyName: String = publicKey
 	keyName = keyName.erase(0, 71).left(30).replace("\n", "").replace("\\", "").replace("/", "")
 	
@@ -136,8 +143,60 @@ func sendMessage(cipherText: PackedByteArray, publicKey: String):
 	GlobalValue.privateMessage[publicKey].append({
 		"sender" : publicKey,
 		"cipherText" : cipherText,
+		"type" : MESSAGE_TYPE.TEXT,
+		"aesKey" : aesKey,
+		"length" : length,
 	})
 	
 	if (GlobalValue.sessionType == GlobalValue.SESSION_TYPE.FRIEND and GlobalValue.session == publicKey):
 		
 		get_node("/root/Menu/ChatControl").flush()
+		
+		
+@rpc("any_peer", "call_remote")
+func sendObject(objectRaw: PackedByteArray, aesKey: PackedByteArray, length: int, publicKey: String):
+	var keyName: String = publicKey
+	keyName = keyName.erase(0, 71).left(30).replace("\n", "").replace("\\", "").replace("/", "")
+	
+	## 接收信息者执行
+	if has_node("/root/Menu/ContactListControl/ContactList/" + keyName):
+		if not (GlobalValue.sessionType == GlobalValue.SESSION_TYPE.FRIEND and GlobalValue.session == publicKey):
+			get_node("/root/Menu/ContactListControl/ContactList/" + keyName).unreadMessages += 1
+
+		move_child(get_node("/root/Menu/ContactListControl/ContactList/" + keyName), 0)
+		get_node("/root/Menu/ContactListControl/ContactList/" + keyName).flush()
+		
+	else:
+		var friendsTab = load("res://client/scenario/PE/menu/friendsTab.tscn").instantiate()
+		friendsTab.friendName = publicKey
+		friendsTab.name = keyName
+		friendsTab.friendKey = publicKey
+		
+		if not (GlobalValue.sessionType == GlobalValue.SESSION_TYPE.FRIEND and GlobalValue.session == publicKey):
+			friendsTab.unreadMessages += 1
+			
+		get_node("/root/Menu/ContactListControl/ContactList").add_child(friendsTab)
+		friendsTab.flush()
+		
+		var friendDict: Dictionary = {
+			"publicKey" : publicKey,
+			"remark" : "",
+		}
+		
+		var file = FileAccess.open("user://friends/" + publicKey.erase(0, 71).left(30).replace("\n", "").replace("\\", "").replace("/", "") + ".json", FileAccess.WRITE)
+		file.store_string(JSON.stringify(friendDict, "\t"))
+
+	if not GlobalValue.privateMessage.has(publicKey):
+		GlobalValue.privateMessage[publicKey] = []
+	GlobalValue.privateMessage[publicKey].append({
+		"sender" : publicKey,
+		"cipherText" : objectRaw,
+		"type" : MESSAGE_TYPE.OBJ,
+		"aesKey" : aesKey,
+		"length" : length,
+	})
+	
+	if (GlobalValue.sessionType == GlobalValue.SESSION_TYPE.FRIEND and GlobalValue.session == publicKey):
+		
+		get_node("/root/Menu/ChatControl").flush()
+		

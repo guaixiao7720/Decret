@@ -16,13 +16,17 @@ func _on_send_button_pressed() -> void:
 	
 
 func send(id: int) -> void:
-	var text: String = $"TextEdit".text
+	var text: String = $"InputVBoxContainer/InputHBoxContainer/TextEdit".text
 	var crypto = Crypto.new()
 	
 	var key: CryptoKey = CryptoKey.new()
 	key.load_from_string(GlobalValue.session, true)
 	
-	var cipherText: PackedByteArray = crypto.encrypt(key, text.to_utf8_buffer())
+	var aesKey: PackedByteArray = Tools.generateKey()
+	
+	var encryptAesKey: PackedByteArray = crypto.encrypt(key, aesKey)
+	
+	var cipherText: PackedByteArray = Tools.aesEncrypt(aesKey, text.to_utf8_buffer())
 	
 	if not GlobalValue.privateMessage.has(GlobalValue.session):
 		GlobalValue.privateMessage[GlobalValue.session] = []
@@ -30,16 +34,18 @@ func send(id: int) -> void:
 	GlobalValue.privateMessage[GlobalValue.session].append({
 		"sender" : GlobalValue.publicKey,
 		"cipherText" : text,
+		"type" : ENet.MESSAGE_TYPE.TEXT,
+		"aesKey" : encryptAesKey,
 	})
 	
 	get_node("/root/Menu/ChatControl").flush()
 	
-	ENet.sendMessage.rpc_id(id, cipherText, GlobalValue.publicKey)
+	ENet.sendMessage.rpc_id(id, cipherText, encryptAesKey, len(text.to_utf8_buffer()), GlobalValue.publicKey)
 	
-	$"TextEdit".text = ""
+	$"InputVBoxContainer/InputHBoxContainer/TextEdit".text = ""
 
 func _on_text_edit_text_changed() -> void:
-	if $"TextEdit".text == "":
-		$"SendButton".disabled = true
+	if $"InputVBoxContainer/InputHBoxContainer/TextEdit".text == "":
+		$"InputVBoxContainer/InputHBoxContainer/SendButton".disabled = true
 	else:
-		$"SendButton".disabled = false
+		$"InputVBoxContainer/InputHBoxContainer/SendButton".disabled = false
