@@ -19,3 +19,7 @@ func newPromptWindow(size: Vector2, tittle: String, text: String, buttonText: St
 	window.buttonText = buttonText
 	
 	return window
+	
+func changeWindow():
+	for node in get_tree().get_nodes_in_group("control"):
+		node.visible = false

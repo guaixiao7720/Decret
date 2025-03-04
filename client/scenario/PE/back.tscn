@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dko7ll2f7dihm"]
+
+[ext_resource type="Texture2D" uid="uid://dyvasvbf3v78j" path="res://client/UI/back.png" id="1_3q0ye"]
+[ext_resource type="Script" uid="uid://b552ewlw5jua1" path="res://client/scenario/PE/back.gd" id="2_x6pjq"]
+
+[node name="Back" type="TextureButton"]
+anchors_preset = -1
+anchor_right = 0.117333
+anchor_bottom = 0.0541872
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("1_3q0ye")
+ignore_texture_size = true
+stretch_mode = 0
+script = ExtResource("2_x6pjq")
+metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]
