@@ -16,7 +16,7 @@ func _on_send_button_pressed() -> void:
 	
 
 func send(id: int) -> void:
-	var text: String = $"TextEdit".text
+	var text: String = $"InputVBoxContainer/InputHBoxContainer/TextEdit".text
 	var crypto = Crypto.new()
 	
 	var key: CryptoKey = CryptoKey.new()
@@ -36,10 +36,10 @@ func send(id: int) -> void:
 	
 	ENet.sendMessage.rpc_id(id, cipherText, GlobalValue.publicKey)
 	
-	$"TextEdit".text = ""
+	$"InputVBoxContainer/InputHBoxContainer/TextEdit".text = ""
 
 func _on_text_edit_text_changed() -> void:
-	if $"TextEdit".text == "":
-		$"SendButton".disabled = true
+	if $"InputVBoxContainer/InputHBoxContainer/TextEdit".text == "":
+		$"InputVBoxContainer/InputHBoxContainer/SendButton".disabled = true
 	else:
-		$"SendButton".disabled = false
+		$"InputVBoxContainer/InputHBoxContainer/SendButton".disabled = false
