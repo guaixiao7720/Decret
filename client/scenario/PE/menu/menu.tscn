@@ -40,6 +40,10 @@ mouse_filter = 1
 script = ExtResource("3_u2v2u")
 metadata/_edit_lock_ = true
 
+[node name="ScrollBottomTimer" type="Timer" parent="ChatControl"]
+wait_time = 0.2
+one_shot = true
+
 [node name="AvatatTextureRect" type="TextureRect" parent="ChatControl"]
 layout_mode = 0
 anchor_right = 0.126667
@@ -83,7 +87,7 @@ anchor_left = 0.0653333
 anchor_top = 0.506158
 anchor_right = 0.949333
 anchor_bottom = 0.99569
-mouse_filter = 1
+mouse_filter = 2
 script = ExtResource("5_0n5uo")
 metadata/_edit_use_anchors_ = true
 metadata/_edit_lock_ = true
@@ -95,12 +99,14 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 alignment = 2
 metadata/_edit_lock_ = true
 
 [node name="InputHBoxContainer" type="HBoxContainer" parent="ChatControl/InputControl/InputVBoxContainer"]
 custom_minimum_size = Vector2(0, 120)
 layout_mode = 2
+mouse_filter = 2
 script = ExtResource("5_fi28v")
 
 [node name="TextEdit" type="TextEdit" parent="ChatControl/InputControl/InputVBoxContainer/InputHBoxContainer"]
@@ -127,6 +133,7 @@ one_shot = true
 [node name="OptionHBoxContainer2" type="HBoxContainer" parent="ChatControl/InputControl/InputVBoxContainer"]
 custom_minimum_size = Vector2(0, 55)
 layout_mode = 2
+mouse_filter = 2
 
 [node name="StickerButton" type="TextureButton" parent="ChatControl/InputControl/InputVBoxContainer/OptionHBoxContainer2"]
 custom_minimum_size = Vector2(65, 0)
@@ -143,18 +150,20 @@ ignore_texture_size = true
 stretch_mode = 5
 
 [node name="ImageControl" type="Control" parent="ChatControl/InputControl/InputVBoxContainer"]
-visible = false
 custom_minimum_size = Vector2(0, 500)
 layout_mode = 2
-mouse_filter = 1
+mouse_filter = 2
 script = ExtResource("9_ayfel")
 
 [node name="ImageTextureRect" type="TextureRect" parent="ChatControl/InputControl/InputVBoxContainer/ImageControl"]
-layout_mode = 0
-anchor_left = 0.144796
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0196375
 anchor_top = 0.176
-anchor_right = 0.784314
+anchor_right = 0.783988
 anchor_bottom = 0.878
+expand_mode = 1
+stretch_mode = 5
 metadata/_edit_use_anchors_ = true
 metadata/_edit_lock_ = true
 
@@ -283,10 +292,12 @@ initial_position = 1
 size = Vector2i(400, 300)
 script = ExtResource("8_vuflk")
 
+[connection signal="timeout" from="ChatControl/ScrollBottomTimer" to="ChatControl" method="_on_scroll_bottom_timer_timeout"]
 [connection signal="text_changed" from="ChatControl/InputControl/InputVBoxContainer/InputHBoxContainer/TextEdit" to="ChatControl/InputControl" method="_on_text_edit_text_changed"]
 [connection signal="pressed" from="ChatControl/InputControl/InputVBoxContainer/InputHBoxContainer/SendButton" to="ChatControl/InputControl" method="_on_send_button_pressed"]
 [connection signal="timeout" from="ChatControl/InputControl/InputVBoxContainer/InputHBoxContainer/Timer" to="ChatControl/InputControl/InputVBoxContainer/InputHBoxContainer" method="_on_timer_timeout"]
 [connection signal="pressed" from="ChatControl/InputControl/InputVBoxContainer/OptionHBoxContainer2/ImageButton" to="ChatControl/InputControl/InputVBoxContainer/ImageControl" method="_on_image_button_pressed"]
+[connection signal="pressed" from="ChatControl/InputControl/InputVBoxContainer/ImageControl/SendImageTextureButton" to="ChatControl/InputControl/InputVBoxContainer/ImageControl" method="_on_send_image_texture_button_pressed"]
 [connection signal="pressed" from="ChatControl/BackButton" to="ChatControl" method="_on_back_button_pressed"]
 [connection signal="pressed" from="ContactListControl/AddButton" to="ContactListControl/AddWindow" method="_on_add_button_pressed"]
 [connection signal="close_requested" from="ContactListControl/AddWindow" to="ContactListControl/AddWindow" method="_on_close_requested"]

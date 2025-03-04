@@ -28,7 +28,7 @@ func flush() -> void:
 	
 	for messageDict: Dictionary in GlobalValue.privateMessage[GlobalValue.session]:
 		if messageDict["sender"] == GlobalValue.publicKey:
-			var text: String = messageDict["cipherText"]
+			var text = messageDict["cipherText"]
 			var messageTab = load("res://client/scenario/PE/menu/message.tscn").instantiate()
 			$"MessageScrollContainer/MessageVBoxContainer".add_child(messageTab)
 			messageTab.setup(messageDict["sender"], text)
@@ -38,18 +38,27 @@ func flush() -> void:
 			var cipherText: PackedByteArray = messageDict["cipherText"]
 			
 			var crypto = Crypto.new()
-			var text: String
+			var text
 			
-			text = crypto.decrypt(GlobalValue.privateKey, cipherText).get_string_from_utf8()
+			var aesKey: PackedByteArray = crypto.decrypt(GlobalValue.privateKey, messageDict["aesKey"])
+			
+			if messageDict["type"] == ENet.MESSAGE_TYPE.OBJ:
+				text = bytes_to_var_with_objects(Tools.aesDecrypt(aesKey, cipherText, messageDict["length"]))
+			elif messageDict["type"] == ENet.MESSAGE_TYPE.TEXT:
+				text = Tools.aesDecrypt(aesKey, cipherText, messageDict["length"]).get_string_from_utf8()
 			
 			var messageTab = load("res://client/scenario/PE/menu/message.tscn").instantiate()
 			$"MessageScrollContainer/MessageVBoxContainer".add_child(messageTab)
 			messageTab.setup(messageDict["sender"], text)
 	
-	$"MessageScrollContainer".scroll_to_bottom()
+	$"ScrollBottomTimer".start()
 	
 
 func _on_back_button_pressed() -> void:
 	GlobalValue.session = ""
 	visible = false
 	$"../ContactListControl".visible = true
+
+
+func _on_scroll_bottom_timer_timeout() -> void:
+	$"MessageScrollContainer".scroll_to_bottom()

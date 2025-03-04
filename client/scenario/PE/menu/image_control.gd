@@ -16,7 +16,7 @@ func _input(event: InputEvent) -> void:
 	if is_visible_in_tree():
 		if event is InputEventMouseButton:
 			if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-				var rect: Rect2 = $"TextEdit".get_rect()
+				var rect: Rect2 = get_rect()
 				if not rect.has_point(get_local_mouse_position()):
 					image = null
 					visible = false
@@ -36,7 +36,36 @@ func _on_image_request_completed(dict):
 			visible = true
 			
 			
-			
+func send(id: int):
+	if image != null:
+		var imageRaw: PackedByteArray = var_to_bytes_with_objects(image)
+		var crypto = Crypto.new()
+		
+		var key: CryptoKey = CryptoKey.new()
+		key.load_from_string(GlobalValue.session, true)
+		
+		var aesKey: PackedByteArray = Tools.generateKey()
+		
+		var encryptAesKey: PackedByteArray = crypto.encrypt(key, aesKey)
+		
+		var cipherText: PackedByteArray = Tools.aesEncrypt(aesKey, imageRaw)
+		
+		if not GlobalValue.privateMessage.has(GlobalValue.session):
+			GlobalValue.privateMessage[GlobalValue.session] = []
+		
+		GlobalValue.privateMessage[GlobalValue.session].append({
+			"sender" : GlobalValue.publicKey,
+			"cipherText" : image,
+			"type" : ENet.MESSAGE_TYPE.OBJ,
+			"aesKey" : encryptAesKey,
+		})
+		
+		get_node("/root/Menu/ChatControl").flush()
+		
+		ENet.sendObject.rpc_id(id, cipherText, encryptAesKey, len(imageRaw), GlobalValue.publicKey)
+
+		visible = false
+		image = null
 	
 func _on_error(e):
 	pass
@@ -50,3 +79,7 @@ func _on_image_button_pressed() -> void:
 
 	
 	
+
+
+func _on_send_image_texture_button_pressed() -> void:
+	ENet.getRpcId.rpc_id(GlobalValue.serverRpcId, GlobalValue.session)
