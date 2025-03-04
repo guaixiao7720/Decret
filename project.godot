@@ -32,6 +32,10 @@ window/handheld/orientation=1
 
 project/assembly_name="Secret Decree"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/GodotGetImage/plugin.cfg")
+
 [global_group]
 
 control=""
