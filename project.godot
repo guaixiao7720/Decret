@@ -13,7 +13,7 @@ config_version=5
 config/name="Decret"
 run/main_scene="res://ready/ready.tscn"
 config/features=PackedStringArray("4.4", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="uid://cngbjmcqynpku"
 
 [autoload]
 
