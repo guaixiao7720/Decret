@@ -45,7 +45,9 @@ func flush() -> void:
 			var messageTab = load("res://client/scenario/PE/menu/message.tscn").instantiate()
 			$"MessageScrollContainer/MessageVBoxContainer".add_child(messageTab)
 			messageTab.setup(messageDict["sender"], text)
-
+	
+	$"MessageScrollContainer".scroll_to_bottom()
+	
 
 func _on_back_button_pressed() -> void:
 	GlobalValue.session = ""
