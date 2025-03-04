@@ -1,4 +1,4 @@
-extends Button
+extends TextureButton
 
 
 # Called when the node enters the scene tree for the first time.
@@ -12,7 +12,6 @@ func _process(delta: float) -> void:
 
 
 func _on_pressed() -> void:
-	if ENet.connectRelayServer(get_node("/root/Login/MainControl/RelayGridContainer/LineEdit").text):
-		pass
-	else:
-		$"/root/Login".add_child(Tools.newPromptWindow(Vector2(300, 200), "error", "connect_reloy_fail", "ok"))
+	for node in get_tree().get_nodes_in_group("control"):
+		node.visible = false
+	get_parent().visible = true

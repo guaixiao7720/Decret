@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://d34x55wbkoid1"]
 
 [ext_resource type="Theme" uid="uid://vspng5affrpu" path="res://client/theme/default.tres" id="1_ktrx4"]
-[ext_resource type="Script" path="res://client/scenario/PE/menu/friends_tab.gd" id="2_cma6c"]
+[ext_resource type="Script" uid="uid://cxqgb18o4tpth" path="res://client/scenario/PE/menu/friends_tab.gd" id="2_cma6c"]
 [ext_resource type="Texture2D" uid="uid://ciyfosf5deglj" path="res://client/UI/red_point.png" id="3_rj67g"]
 
 [node name="FriendsTab" type="TextureButton"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c3suurfbleroy"]
 
-[ext_resource type="Script" path="res://client/scenario/lib/promptWindow/prompt_window.gd" id="1_n3f37"]
+[ext_resource type="Script" uid="uid://cdn7u5s07pq68" path="res://client/scenario/lib/promptWindow/prompt_window.gd" id="1_n3f37"]
 
 [node name="PromptWindow" type="Window"]
 initial_position = 1

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://c4b0ps71pe5pt"]
 
 [ext_resource type="Theme" uid="uid://vspng5affrpu" path="res://client/theme/default.tres" id="1_ri8ml"]
-[ext_resource type="Script" path="res://client/scenario/PE/menu/message.gd" id="1_vooa2"]
+[ext_resource type="Script" uid="uid://bcsuu5tfkfjmn" path="res://client/scenario/PE/menu/message.gd" id="1_vooa2"]
 
 [node name="Message" type="Control"]
 custom_minimum_size = Vector2(0, 215)
