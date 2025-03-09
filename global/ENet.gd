@@ -115,7 +115,7 @@ func sendMessage(cipherText: PackedByteArray, aesKey: PackedByteArray, length: i
 		if not (GlobalValue.sessionType == GlobalValue.SESSION_TYPE.FRIEND and GlobalValue.session == publicKey):
 			get_node("/root/Menu/ContactListControl/ContactList/" + keyName).unreadMessages += 1
 
-		move_child(get_node("/root/Menu/ContactListControl/ContactList/" + keyName), 0)
+		get_node("/root/Menu/ContactListControl/ContactList").move_child(get_node("/root/Menu/ContactListControl/ContactList/" + keyName), 0)
 		get_node("/root/Menu/ContactListControl/ContactList/" + keyName).flush()
 		
 	else:
@@ -129,6 +129,8 @@ func sendMessage(cipherText: PackedByteArray, aesKey: PackedByteArray, length: i
 			
 		get_node("/root/Menu/ContactListControl/ContactList").add_child(friendsTab)
 		friendsTab.flush()
+		
+		get_node("/root/Menu/ContactListControl/ContactList").move_child(get_node("/root/Menu/ContactListControl/ContactList/" + keyName), 0)
 		
 		var friendDict: Dictionary = {
 			"publicKey" : publicKey,
@@ -168,7 +170,7 @@ func sendObject(objectRaw: PackedByteArray, aesKey: PackedByteArray, length: int
 		if not (GlobalValue.sessionType == GlobalValue.SESSION_TYPE.FRIEND and GlobalValue.session == publicKey):
 			get_node("/root/Menu/ContactListControl/ContactList/" + keyName).unreadMessages += 1
 
-		move_child(get_node("/root/Menu/ContactListControl/ContactList/" + keyName), 0)
+		get_node("/root/Menu/ContactListControl/ContactList").move_child(get_node("/root/Menu/ContactListControl/ContactList/" + keyName), 0)
 		get_node("/root/Menu/ContactListControl/ContactList/" + keyName).flush()
 		
 	else:
@@ -182,6 +184,8 @@ func sendObject(objectRaw: PackedByteArray, aesKey: PackedByteArray, length: int
 			
 		get_node("/root/Menu/ContactListControl/ContactList").add_child(friendsTab)
 		friendsTab.flush()
+		
+		get_node("/root/Menu/ContactListControl/ContactList").move_child(get_node("/root/Menu/ContactListControl/ContactList/" + keyName), 0)
 		
 		var friendDict: Dictionary = {
 			"publicKey" : publicKey,
