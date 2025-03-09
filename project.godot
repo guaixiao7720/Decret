@@ -34,7 +34,7 @@ project/assembly_name="Secret Decree"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/GodotGetImage/plugin.cfg")
+enabled=PackedStringArray("res://addons/GodotGetImage/plugin.cfg", "res://addons/Notification/plugin.cfg")
 
 [global_group]
 

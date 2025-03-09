@@ -151,7 +151,12 @@ func sendMessage(cipherText: PackedByteArray, aesKey: PackedByteArray, length: i
 	if (GlobalValue.sessionType == GlobalValue.SESSION_TYPE.FRIEND and GlobalValue.session == publicKey):
 		
 		get_node("/root/Menu/ChatControl").flush()
-		
+	else:
+		if GlobalValue.osName == "Android":
+			var notification = Engine.get_singleton("Notification")
+			notification.showNotification(get_node("/root/Menu/ContactListControl/ContactList/" + keyName).friendName, "发来一条消息", GlobalValue.notificationId)
+			GlobalValue.notificationId += 1
+
 		
 @rpc("any_peer", "call_remote")
 func sendObject(objectRaw: PackedByteArray, aesKey: PackedByteArray, length: int, publicKey: String):
@@ -199,4 +204,9 @@ func sendObject(objectRaw: PackedByteArray, aesKey: PackedByteArray, length: int
 	if (GlobalValue.sessionType == GlobalValue.SESSION_TYPE.FRIEND and GlobalValue.session == publicKey):
 		
 		get_node("/root/Menu/ChatControl").flush()
+	else:
+		if GlobalValue.osName == "Android":
+			var notification = Engine.get_singleton("Notification")
+			notification.showNotification(get_node("/root/Menu/ContactListControl/ContactList/" + keyName).friendName, "发来一条消息", GlobalValue.notificationId)
+			GlobalValue.notificationId += 1
 		
