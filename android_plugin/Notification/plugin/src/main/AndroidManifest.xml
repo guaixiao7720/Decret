@@ -16,7 +16,7 @@
         -->
         <meta-data
             android:name="org.godotengine.plugin.v2.${godotPluginName}"
-            android:value="${godotPluginPackageName}.GodotAndroidPlugin"/>
+            android:value="${godotPluginPackageName}.Notification"/>
     </application>
 
 </manifest>
