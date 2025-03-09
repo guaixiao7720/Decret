@@ -16,7 +16,8 @@ enum MESSAGE_TYPE{
 func _ready() -> void:
 	multiplayer.peer_connected.connect(_on_user_connected)
 	multiplayer.peer_disconnected.connect(_on_user_disconnected)
-
+	multiplayer.server_disconnected.connect(_on_server_disconnected)
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -57,6 +58,14 @@ func _on_user_connected(id: int):
 	
 func _on_user_disconnected(id: int):
 	keyRpcID.erase(id)
+	
+func _on_server_disconnected():
+	for i: int in range(3):
+		if connectRelayServer(GlobalValue.address):
+			return
+			
+	get_tree().change_scene_to_file("res://client/scenario/PE/login/login.tscn")
+	
 
 @rpc("any_peer", "call_remote")
 func regUser(publicKey: String):

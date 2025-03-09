@@ -13,6 +13,6 @@ func _process(delta: float) -> void:
 
 func _on_pressed() -> void:
 	if ENet.connectRelayServer(get_node("/root/Login/MainControl/RelayGridContainer/LineEdit").text):
-		pass
+		GlobalValue.address = get_node("/root/Login/MainControl/RelayGridContainer/LineEdit").text
 	else:
 		$"/root/Login".add_child(Tools.newPromptWindow(Vector2(300, 200), "error", "connect_reloy_fail", "ok"))

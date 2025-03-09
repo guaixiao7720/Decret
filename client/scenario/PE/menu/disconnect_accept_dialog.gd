@@ -17,5 +17,4 @@ func _process(delta: float) -> void:
 
 
 func _on_canceled() -> void:
-	GlobalValue.session = ""
-	get_tree().change_scene_to_file("res://client/scenario/PE/login/login.tscn")
+	pass
