@@ -86,6 +86,12 @@ func getRpcId(publicKey: String):
 		if rpcid == null:
 			print("未找到")
 		else:
+			if get_node("/root/Server").notificationPeers.has(publicKey):
+				var notificationPeer: PacketPeerUDP = get_node("/root/Server").notificationPeers[publicKey]
+				var sender: String = keyRpcID.find_key(multiplayer.get_remote_sender_id())
+				sender = sender.erase(0, 71).left(30).replace("\n", "").replace("\\", "").replace("/", "")
+				notificationPeer.put_packet(sender.to_utf8_buffer())
+				
 			recieveRpcId.rpc_id(multiplayer.get_remote_sender_id(), rpcid)
 
 @rpc("authority", "call_remote")

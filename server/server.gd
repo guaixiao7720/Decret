@@ -6,6 +6,10 @@ var config: Dictionary = {
 	"maxClients" : 4095,
 }
 
+var notificationServer: UDPServer
+
+var notificationPeers: Dictionary = {}
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	print("服务器正在启动...")
@@ -46,9 +50,19 @@ func _ready() -> void:
 	else:
 		print("服务端启动失败")
 		
-		
+	notificationServer = UDPServer.new()
+	notificationServer.listen(config["port"] + 1)
+	
+	
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	notificationServer.poll()
+
+	var peer = notificationServer.take_connection()
+	if peer != null:
+		var packet: PackedByteArray = peer.get_packet()
+		var publicKey: String = packet.get_string_from_utf8()
+		
+		notificationPeers[publicKey] = peer
