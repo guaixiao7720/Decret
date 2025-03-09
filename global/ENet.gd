@@ -111,12 +111,12 @@ func sendMessage(cipherText: PackedByteArray, aesKey: PackedByteArray, length: i
 	keyName = keyName.erase(0, 71).left(30).replace("\n", "").replace("\\", "").replace("/", "")
 	
 	## 接收信息者执行
-	if has_node("/root/Menu/ContactListControl/ContactList/" + keyName):
+	if has_node("/root/Menu/ContactListControl/ContactListScrollContainer/ContactList/" + keyName):
 		if not (GlobalValue.sessionType == GlobalValue.SESSION_TYPE.FRIEND and GlobalValue.session == publicKey):
-			get_node("/root/Menu/ContactListControl/ContactList/" + keyName).unreadMessages += 1
+			get_node("/root/Menu/ContactListControl/ContactListScrollContainer/ContactList/" + keyName).unreadMessages += 1
 
-		get_node("/root/Menu/ContactListControl/ContactList").move_child(get_node("/root/Menu/ContactListControl/ContactList/" + keyName), 0)
-		get_node("/root/Menu/ContactListControl/ContactList/" + keyName).flush()
+		get_node("/root/Menu/ContactListControl/ContactListScrollContainer/ContactList").move_child(get_node("/root/Menu/ContactListControl/ContactListScrollContainer/ContactList/" + keyName), 0)
+		get_node("/root/Menu/ContactListControl/ContactListScrollContainer/ContactList/" + keyName).flush()
 		
 	else:
 		var friendsTab = load("res://client/scenario/PE/menu/friendsTab.tscn").instantiate()
@@ -127,10 +127,10 @@ func sendMessage(cipherText: PackedByteArray, aesKey: PackedByteArray, length: i
 		if not (GlobalValue.sessionType == GlobalValue.SESSION_TYPE.FRIEND and GlobalValue.session == publicKey):
 			friendsTab.unreadMessages += 1
 			
-		get_node("/root/Menu/ContactListControl/ContactList").add_child(friendsTab)
+		get_node("/root/Menu/ContactListControl/ContactListScrollContainer/ContactList").add_child(friendsTab)
 		friendsTab.flush()
 		
-		get_node("/root/Menu/ContactListControl/ContactList").move_child(get_node("/root/Menu/ContactListControl/ContactList/" + keyName), 0)
+		get_node("/root/Menu/ContactListControl/ContactListScrollContainer/ContactList").move_child(get_node("/root/Menu/ContactListControl/ContactListScrollContainer/ContactList/" + keyName), 0)
 		
 		var friendDict: Dictionary = {
 			"publicKey" : publicKey,
@@ -156,7 +156,7 @@ func sendMessage(cipherText: PackedByteArray, aesKey: PackedByteArray, length: i
 	else:
 		if GlobalValue.osName == "Android":
 			var notification = Engine.get_singleton("Notification")
-			notification.showNotification(get_node("/root/Menu/ContactListControl/ContactList/" + keyName).friendName, "发来一条消息", GlobalValue.notificationId)
+			notification.showNotification(get_node("/root/Menu/ContactListControl/ContactListScrollContainer/ContactList/" + keyName).friendName, "发来一条消息", GlobalValue.notificationId)
 			GlobalValue.notificationId += 1
 
 		
@@ -166,12 +166,12 @@ func sendObject(objectRaw: PackedByteArray, aesKey: PackedByteArray, length: int
 	keyName = keyName.erase(0, 71).left(30).replace("\n", "").replace("\\", "").replace("/", "")
 	
 	## 接收信息者执行
-	if has_node("/root/Menu/ContactListControl/ContactList/" + keyName):
+	if has_node("/root/Menu/ContactListControl/ContactListScrollContainer/ContactList/" + keyName):
 		if not (GlobalValue.sessionType == GlobalValue.SESSION_TYPE.FRIEND and GlobalValue.session == publicKey):
-			get_node("/root/Menu/ContactListControl/ContactList/" + keyName).unreadMessages += 1
+			get_node("/root/Menu/ContactListControl/ContactListScrollContainer/ContactList/" + keyName).unreadMessages += 1
 
-		get_node("/root/Menu/ContactListControl/ContactList").move_child(get_node("/root/Menu/ContactListControl/ContactList/" + keyName), 0)
-		get_node("/root/Menu/ContactListControl/ContactList/" + keyName).flush()
+		get_node("/root/Menu/ContactListControl/ContactListScrollContainer/ContactList").move_child(get_node("/root/Menu/ContactListControl/ContactListScrollContainer/ContactList/" + keyName), 0)
+		get_node("/root/Menu/ContactListControl/ContactListScrollContainer/ContactList/" + keyName).flush()
 		
 	else:
 		var friendsTab = load("res://client/scenario/PE/menu/friendsTab.tscn").instantiate()
@@ -182,10 +182,10 @@ func sendObject(objectRaw: PackedByteArray, aesKey: PackedByteArray, length: int
 		if not (GlobalValue.sessionType == GlobalValue.SESSION_TYPE.FRIEND and GlobalValue.session == publicKey):
 			friendsTab.unreadMessages += 1
 			
-		get_node("/root/Menu/ContactListControl/ContactList").add_child(friendsTab)
+		get_node("/root/Menu/ContactListControl/ContactListScrollContainer/ContactList").add_child(friendsTab)
 		friendsTab.flush()
 		
-		get_node("/root/Menu/ContactListControl/ContactList").move_child(get_node("/root/Menu/ContactListControl/ContactList/" + keyName), 0)
+		get_node("/root/Menu/ContactListControl/ContactListScrollContainer/ContactList").move_child(get_node("/root/Menu/ContactListControl/ContactListScrollContainer/ContactList/" + keyName), 0)
 		
 		var friendDict: Dictionary = {
 			"publicKey" : publicKey,
@@ -211,6 +211,6 @@ func sendObject(objectRaw: PackedByteArray, aesKey: PackedByteArray, length: int
 	else:
 		if GlobalValue.osName == "Android":
 			var notification = Engine.get_singleton("Notification")
-			notification.showNotification(get_node("/root/Menu/ContactListControl/ContactList/" + keyName).friendName, "发来一条消息", GlobalValue.notificationId)
+			notification.showNotification(get_node("/root/Menu/ContactListControl/ContactListScrollContainer/ContactList/" + keyName).friendName, "发来一条消息", GlobalValue.notificationId)
 			GlobalValue.notificationId += 1
 		

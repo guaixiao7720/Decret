@@ -34,5 +34,5 @@ func _on_pressed() -> void:
 		friendsTab.friendKey = publicKey
 		friendsTab.name = keyName
 		
-		get_node("/root/Menu/ContactListControl/ContactList").add_child(friendsTab)
+		get_node("/root/Menu/ContactListControl/ContactListScrollContainer/ContactList").add_child(friendsTab)
 		friendsTab.flush()
