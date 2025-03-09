@@ -4,6 +4,8 @@ var getImage
 
 var image: Image
 
+var isHover: bool = false
+
 func _ready() -> void:
 	visible = false
 	if OS.get_name() == "Android":
@@ -16,8 +18,7 @@ func _input(event: InputEvent) -> void:
 	if is_visible_in_tree():
 		if event is InputEventMouseButton:
 			if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-				var rect: Rect2 = get_rect()
-				if not rect.has_point(get_local_mouse_position()):
+				if not isHover:
 					image = null
 					visible = false
 
@@ -74,6 +75,9 @@ func _on_permission_not_granted_by_user(permission):
 	pass
 
 func _on_image_button_pressed() -> void:
+	for node in get_tree().get_nodes_in_group("InputControl"):
+		node.visible = false
+		
 	if OS.get_name() == "Android":
 		getImage.getGalleryImage()
 
@@ -83,3 +87,11 @@ func _on_image_button_pressed() -> void:
 
 func _on_send_image_texture_button_pressed() -> void:
 	ENet.getRpcId.rpc_id(GlobalValue.serverRpcId, GlobalValue.session)
+
+
+func _on_mouse_entered() -> void:
+	isHover = true
+
+
+func _on_mouse_exited() -> void:
+	isHover = false
