@@ -17,6 +17,10 @@ func _on_send_button_pressed() -> void:
 
 func send(id: int) -> void:
 	var text: String = $"InputVBoxContainer/InputHBoxContainer/TextEdit".text
+	
+	if SensitiveWords.IsSensitive(text):
+		text = "***"
+	
 	var crypto = Crypto.new()
 	
 	var key: CryptoKey = CryptoKey.new()
