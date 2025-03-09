@@ -9,7 +9,7 @@ func _input(event: InputEvent) -> void:
 		if event is InputEventMouseButton:
 			if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 				if not isHover:
-					visible = false
+					$"CloseTimer".start()
 
 func _on_sticker_button_pressed() -> void:
 	for node in get_tree().get_nodes_in_group("InputControl"):
@@ -23,3 +23,7 @@ func _on_mouse_entered() -> void:
 
 func _on_mouse_exited() -> void:
 	isHover = false
+
+
+func _on_close_timer_timeout() -> void:
+	visible = false

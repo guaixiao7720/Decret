@@ -19,8 +19,7 @@ func _input(event: InputEvent) -> void:
 		if event is InputEventMouseButton:
 			if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 				if not isHover:
-					image = null
-					visible = false
+					$"CloseTimer".start()
 
 
 func _on_image_request_completed(dict):
@@ -95,3 +94,8 @@ func _on_mouse_entered() -> void:
 
 func _on_mouse_exited() -> void:
 	isHover = false
+
+
+func _on_close_timer_timeout() -> void:
+	image = null
+	visible = false

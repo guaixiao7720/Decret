@@ -9,9 +9,9 @@ func _ready() -> void:
 			if stickerDir.current_is_dir():
 				pass
 			else:
-				if file_name.ends_with(".jpg"):
+				if file_name.ends_with(".import"):
 					var sticker = load("res://client/scenario/PE/menu/sticker.tscn").instantiate()
-					sticker.stickerID = file_name
+					sticker.stickerID = file_name.trim_suffix(".import")
 					add_child(sticker)
 					sticker.setup()
 					

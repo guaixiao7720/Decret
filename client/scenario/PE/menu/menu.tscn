@@ -183,6 +183,10 @@ stretch_mode = 0
 metadata/_edit_use_anchors_ = true
 metadata/_edit_lock_ = true
 
+[node name="CloseTimer" type="Timer" parent="ChatControl/InputControl/InputVBoxContainer/ImageControl"]
+wait_time = 0.1
+one_shot = true
+
 [node name="StickerControl" type="Control" parent="ChatControl/InputControl/InputVBoxContainer" groups=["InputControl"]]
 visible = false
 custom_minimum_size = Vector2(0, 500)
@@ -207,6 +211,10 @@ layout_mode = 2
 size_flags_horizontal = 3
 columns = 3
 script = ExtResource("10_6ivbi")
+
+[node name="CloseTimer" type="Timer" parent="ChatControl/InputControl/InputVBoxContainer/StickerControl"]
+wait_time = 0.1
+one_shot = true
 
 [node name="Control" type="Control" parent="ChatControl/InputControl/InputVBoxContainer"]
 visible = false
@@ -328,8 +336,10 @@ script = ExtResource("8_vuflk")
 [connection signal="mouse_entered" from="ChatControl/InputControl/InputVBoxContainer/ImageControl" to="ChatControl/InputControl/InputVBoxContainer/ImageControl" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="ChatControl/InputControl/InputVBoxContainer/ImageControl" to="ChatControl/InputControl/InputVBoxContainer/ImageControl" method="_on_mouse_exited"]
 [connection signal="pressed" from="ChatControl/InputControl/InputVBoxContainer/ImageControl/SendImageTextureButton" to="ChatControl/InputControl/InputVBoxContainer/ImageControl" method="_on_send_image_texture_button_pressed"]
+[connection signal="timeout" from="ChatControl/InputControl/InputVBoxContainer/ImageControl/CloseTimer" to="ChatControl/InputControl/InputVBoxContainer/ImageControl" method="_on_close_timer_timeout"]
 [connection signal="mouse_entered" from="ChatControl/InputControl/InputVBoxContainer/StickerControl" to="ChatControl/InputControl/InputVBoxContainer/StickerControl" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="ChatControl/InputControl/InputVBoxContainer/StickerControl" to="ChatControl/InputControl/InputVBoxContainer/StickerControl" method="_on_mouse_exited"]
+[connection signal="timeout" from="ChatControl/InputControl/InputVBoxContainer/StickerControl/CloseTimer" to="ChatControl/InputControl/InputVBoxContainer/StickerControl" method="_on_close_timer_timeout"]
 [connection signal="pressed" from="ChatControl/BackButton" to="ChatControl" method="_on_back_button_pressed"]
 [connection signal="pressed" from="ContactListControl/AddButton" to="ContactListControl/AddWindow" method="_on_add_button_pressed"]
 [connection signal="close_requested" from="ContactListControl/AddWindow" to="ContactListControl/AddWindow" method="_on_close_requested"]
