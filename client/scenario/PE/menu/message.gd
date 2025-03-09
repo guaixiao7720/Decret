@@ -16,7 +16,12 @@ func setup(nameStr: String, message):
 	$"nameLabel".text = name1
 	
 	if message is String:
-		$"messageRichTextLabel".text = message
+		var bbcodeText: String = message
+		
+		bbcodeText = bbcodeText.insert(0, "[color=white][font_size=28]")
+		bbcodeText += "[/font_size][/color]"
+		
+		$"messageRichTextLabel".text = bbcodeText
 	
 	elif message is Image:
 		custom_minimum_size.y = 566
