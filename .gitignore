@@ -7,7 +7,7 @@ export.cfg
 export_presets.cfg
 
 .vs/
-android/
+build/
 
 # Imported translations (automatically generated from CSV files)
 *.translation
